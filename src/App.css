@@ -209,6 +209,20 @@
   gap: 6px;
 }
 
+.photo-tile {
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.photo-tile img,
+.image-break-photo img,
+.photo-band-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
 .contact-badge p,
 .contact-badge span {
   margin: 0;
@@ -225,6 +239,32 @@
 .story-copy,
 .contact-copy {
   max-width: 720px;
+}
+
+.image-break,
+.photo-band {
+  margin: 8px 32px 0;
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.image-break-copy,
+.photo-band-copy {
+  padding: 28px;
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(255, 248, 241, 0.92), rgba(248, 240, 232, 0.92));
+  border: 1px solid rgba(90, 62, 54, 0.08);
+}
+
+.image-break-photo,
+.photo-band-photo {
+  overflow: hidden;
+  border-radius: 28px;
+  min-height: 360px;
+  border: 1px solid rgba(90, 62, 54, 0.08);
 }
 
 .domain-grid,
@@ -369,6 +409,19 @@
   width: fit-content;
 }
 
+.reveal-up {
+  opacity: 0;
+  transform: translateY(42px);
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease;
+}
+
+.reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (max-width: 960px) {
   .page-shell {
     width: min(100% - 20px, 1180px);
@@ -378,6 +431,8 @@
 
   .topbar,
   .hero,
+  .image-break,
+  .photo-band,
   .section-grid,
   .story-block,
   .about-section,
@@ -389,11 +444,19 @@
 
   .topbar,
   .hero-socialli,
+  .image-break,
+  .photo-band,
   .story-block,
   .about-section,
   .pricing-grid,
   .contact-layout {
     grid-template-columns: 1fr;
+  }
+
+  .image-break,
+  .photo-band {
+    margin-left: 20px;
+    margin-right: 20px;
   }
 
   .topbar {

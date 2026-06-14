@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import './App.css'
 
 const site = {
@@ -6,6 +7,15 @@ const site = {
   phone: '06 00 00 00 00',
   email: 'contact@lafabriquesociale.fr',
   location: 'Accompagnement en présentiel et à distance',
+}
+
+const photos = {
+  support:
+    'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1200&q=80',
+  consultation:
+    'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1200&q=80',
+  paperwork:
+    'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80',
 }
 
 const domains = [
@@ -81,6 +91,26 @@ const experience = [
 function App() {
   const logoBoard = `${import.meta.env.BASE_URL}brand/logo-board.jpg`
 
+  useEffect(() => {
+    const elements = document.querySelectorAll('[data-reveal]')
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.18, rootMargin: '0px 0px -8% 0px' },
+    )
+
+    elements.forEach((element) => observer.observe(element))
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <div className="page-shell">
       <header className="topbar">
@@ -102,7 +132,7 @@ function App() {
 
       <main id="accueil">
         <section className="hero hero-socialli">
-          <div className="hero-copy">
+          <div className="hero-copy reveal-up is-visible">
             <p className="eyebrow">Accompagnement social personnalisé et confidentiel</p>
             <h1>{site.name}, une aide concrète et humaine quand le système bloque.</h1>
             <p className="intro">
@@ -128,7 +158,7 @@ function App() {
           </div>
 
           <aside className="hero-side">
-            <div className="hero-identity-card">
+            <div className="hero-identity-card reveal-up is-visible">
               <div className="hero-card-frame">
                 <img
                   src={logoBoard}
@@ -141,15 +171,22 @@ function App() {
               </div>
             </div>
 
-            <div className="contact-badge">
+            <div className="contact-badge reveal-up is-visible">
               <p>Diagnostic gratuit</p>
               <a href={`tel:${site.phone.replaceAll(' ', '')}`}>{site.phone}</a>
               <span>Du lundi au vendredi, sur rendez-vous</span>
             </div>
+
+            <div className="photo-tile reveal-up is-visible">
+              <img
+                src={photos.consultation}
+                alt="Temps d échange et d accompagnement social"
+              />
+            </div>
           </aside>
         </section>
 
-        <section className="section-grid" id="domaines">
+        <section className="section-grid reveal-up" id="domaines" data-reveal>
           <div className="section-heading">
             <p className="eyebrow">Domaines d intervention</p>
             <h2>Une approche humaine, un accompagnement sur mesure.</h2>
@@ -166,7 +203,24 @@ function App() {
           </div>
         </section>
 
-        <section className="story-block" id="methode">
+        <section className="image-break reveal-up" data-reveal>
+          <div className="image-break-copy">
+            <p className="eyebrow">Un accompagnement incarné</p>
+            <h2>Un cadre calme pour reprendre la main sur des démarches parfois lourdes.</h2>
+            <p>
+              Entre écoute, organisation et médiation avec les organismes, le
+              suivi avance pas à pas avec une présence concrète à vos côtés.
+            </p>
+          </div>
+          <div className="image-break-photo">
+            <img
+              src={photos.support}
+              alt="Moment d écoute et de soutien humain"
+            />
+          </div>
+        </section>
+
+        <section className="story-block reveal-up" id="methode" data-reveal>
           <div className="story-copy">
             <p className="eyebrow">Parcours d accompagnement</p>
             <h2>Étapes clés du suivi</h2>
@@ -187,7 +241,7 @@ function App() {
           </div>
         </section>
 
-        <section className="about-section" id="apropos">
+        <section className="about-section reveal-up" id="apropos" data-reveal>
           <div className="about-card about-rich">
             <p className="eyebrow">À propos de moi</p>
             <h2>Une expérience riche et diversifiée au service d un accompagnement personnalisé.</h2>
@@ -221,7 +275,24 @@ function App() {
           </div>
         </section>
 
-        <section className="pricing-section" id="tarifs">
+        <section className="photo-band reveal-up" data-reveal>
+          <div className="photo-band-photo">
+            <img
+              src={photos.paperwork}
+              alt="Documents et démarches administratives"
+            />
+          </div>
+          <div className="photo-band-copy">
+            <p className="eyebrow">Clarté et organisation</p>
+            <h2>Mettre de l ordre, comprendre les droits, faire avancer les dossiers.</h2>
+            <p>
+              Le travail ne se limite pas au rendez-vous : analyse, rédaction,
+              coordination et suivi font partie intégrante de l accompagnement.
+            </p>
+          </div>
+        </section>
+
+        <section className="pricing-section reveal-up" id="tarifs" data-reveal>
           <div className="section-heading">
             <p className="eyebrow">Tarifs</p>
             <h2>Des formules lisibles selon le niveau d accompagnement nécessaire.</h2>
@@ -238,7 +309,7 @@ function App() {
           </div>
         </section>
 
-        <section className="contact-section" id="contact">
+        <section className="contact-section reveal-up" id="contact" data-reveal>
           <div className="contact-copy">
             <p className="eyebrow">Prendre contact</p>
             <h2>Un premier échange peut déjà vous aider à y voir plus clair.</h2>
