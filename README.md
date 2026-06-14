@@ -16,6 +16,10 @@ npm run build
 npm run preview
 ```
 
+## Publication GitHub Pages
+
+Le site peut etre servi directement depuis le dossier `docs/` sur la branche `main`.
+
 ## Personnalisation rapide
 
 Les informations a modifier en priorite se trouvent dans [src/App.jsx](/Users/gestionnairedeparcinformatique-valentin/Documents/Assitsant%20social/src/App.jsx):
