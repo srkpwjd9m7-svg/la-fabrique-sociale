@@ -53,6 +53,8 @@ const strengths = [
 ]
 
 function App() {
+  const logoBoard = `${import.meta.env.BASE_URL}brand/logo-board.jpg`
+
   return (
     <div className="page-shell">
       <header className="topbar">
@@ -103,7 +105,7 @@ function App() {
           <aside className="hero-card" aria-label="Identite visuelle">
             <div className="hero-card-frame">
               <img
-                src="/brand/logo-board.jpg"
+                src={logoBoard}
                 alt="Identité visuelle de La fabrique sociale"
               />
             </div>
