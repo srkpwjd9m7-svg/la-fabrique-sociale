@@ -1,366 +1,310 @@
-import { useEffect } from 'react'
 import './App.css'
 
 const site = {
   name: 'La fabrique sociale',
-  tagline: 'Écouter, comprendre, construire ensemble',
   phone: '06 00 00 00 00',
   email: 'contact@lafabriquesociale.fr',
-  location: 'Accompagnement en présentiel et à distance',
-}
-
-const photos = {
-  support:
-    'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1200&q=80',
-  consultation:
-    'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1200&q=80',
-  paperwork:
-    'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80',
+  area: '[Zone geographique]',
+  legal: 'Mentions legales',
+  rpps: '[a completer]',
+  personName: '[Votre nom]',
 }
 
 const domains = [
   {
     title: 'Le budget',
-    text: 'Gestion budgétaire, demandes d aides financières, prévention du surendettement et reprise de visibilité sur les priorités du quotidien.',
+    text: "Gestion budgetaire, aide financiere, aide a la constitution d'un dossier de surendettement.",
   },
   {
     title: 'La famille',
-    text: 'Soutien à la parentalité, situations de tension familiale, accompagnement d un proche et coordination autour des besoins du foyer.',
+    text: 'Parentalite, gestion des conflits familiaux, deuil, accompagnement des personnes agees.',
   },
   {
     title: 'Le handicap',
-    text: 'Dossiers MDPH, reconnaissance du handicap, accès aux aides humaines, matérielles ou financières et maintien dans l emploi.',
+    text: "Reconnaissance du handicap, maintien dans l'emploi, aides financieres, materielles et humaines.",
   },
   {
-    title: 'L insertion sociale ou professionnelle',
-    text: 'Reprise de parcours, maintien dans l emploi, recherche de logement, mobilisation des droits et des bons interlocuteurs.',
+    title: "L'insertion",
+    text: "Reconversion professionnelle, maintien dans l'emploi, recherche de logement et leviers financiers.",
   },
   {
     title: 'La retraite',
-    text: 'Lecture du relevé de carrière, préparation du départ, demandes administratives et vérification des droits ouverts.',
+    text: "Mise a jour de votre releve de carriere, demande de retraite, evaluation d'un depart anticipe.",
   },
   {
-    title: 'La santé',
-    text: 'Arrêt de travail, invalidité, dossiers complexes, lien avec les organismes et accompagnement de la personne malade ou de ses proches.',
+    title: 'La sante',
+    text: "Accompagnement de la personne malade et de ses proches, dossiers d'invalidite et maladie professionnelle.",
   },
 ]
 
 const steps = [
   {
     phase: 'Phase 1',
-    title: 'Échange téléphonique',
-    text: 'Un premier échange gratuit pour comprendre votre situation, identifier les urgences et voir comment je peux vous accompagner.',
+    title: 'Echange telephonique',
+    text: 'Diagnostic gratuit. A partir de cet echange, je vous transmets un devis selon le forfait adapte a votre situation.',
   },
   {
     phase: 'Phase 2',
-    title: 'Rendez-vous et stratégie',
-    text: 'Nous faisons le point ensemble sur les droits, les démarches à engager et les actions prioritaires à mettre en place.',
+    title: 'Rendez-vous physique',
+    text: 'Rencontre et mise en place du lien de confiance. Je vous conseille et vous guide vers des outils adaptes.',
   },
   {
     phase: 'Phase 3',
     title: 'Administratif et suivi',
-    text: 'Analyse des documents, rédaction, coordination avec les organismes et accompagnement dans la durée si nécessaire.',
+    text: 'En dehors de nos echanges : analyse, redaction, coordination, negociations avec les organismes concernes.',
   },
 ]
 
-const offers = [
-  {
-    name: 'Échange téléphonique',
-    price: 'Offert',
-    text: 'Premier contact pour analyser le besoin, répondre à vos questions et orienter vers la formule adaptée.',
-  },
-  {
-    name: 'Accompagnement individuel',
-    price: 'À partir de 60 €',
-    text: 'Rendez-vous en présentiel ou à distance, analyse de la situation et travail administratif hors rendez-vous.',
-  },
-  {
-    name: 'Accompagnement renforcé',
-    price: 'À partir de 130 €',
-    text: 'Pour les situations demandant davantage de coordination, de suivi et de temps de traitement.',
-  },
+const navItems = [
+  { href: '#accueil', label: 'Accueil' },
+  { href: '#apropos', label: 'A propos' },
+  { href: '#domaines', label: "Domaines d'intervention" },
+  { href: '#tarifs', label: 'Tarifs' },
 ]
 
-const experience = [
-  'L enfance et l adolescence',
-  'Le service social de proximité',
-  'La protection internationale',
-  'Le service social d entreprise',
-]
+function PlaceholderPortrait({ label }) {
+  return (
+    <div className="portrait-shell">
+      <div className="portrait-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <circle cx="12" cy="8" r="4" />
+          <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
+        </svg>
+      </div>
+      <span>{label}</span>
+    </div>
+  )
+}
+
+function DomainCard({ title, text }) {
+  return (
+    <article className="domain-card">
+      <div className="domain-icon" />
+      <h3>{title}</h3>
+      <p>{text}</p>
+      <a href="#contact">
+        En savoir plus
+        <span aria-hidden="true">→</span>
+      </a>
+    </article>
+  )
+}
 
 function App() {
-  const logoBoard = `${import.meta.env.BASE_URL}brand/logo-board.jpg`
-
-  useEffect(() => {
-    const elements = document.querySelectorAll('[data-reveal]')
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.18, rootMargin: '0px 0px -8% 0px' },
-    )
-
-    elements.forEach((element) => observer.observe(element))
-
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <div className="page-shell">
-      <header className="topbar">
-        <a className="brand" href="#accueil">
-          <span className="brand-mark">LF</span>
-          <span>
-            <strong>{site.name}</strong>
-            <small>{site.tagline}</small>
-          </span>
-        </a>
+    <div className="site">
+      <header className="site-header">
+        <div className="header-inner">
+          <a className="brand-title" href="#accueil">
+            {site.name}
+          </a>
 
-        <nav className="topnav" aria-label="Navigation principale">
-          <a href="#apropos">À propos</a>
-          <a href="#domaines">Domaines d intervention</a>
-          <a href="#tarifs">Tarifs</a>
-          <a href="#contact">Prendre contact</a>
-        </nav>
+          <nav className="site-nav" aria-label="Navigation principale">
+            {navItems.map((item) => (
+              <a key={item.href} href={item.href}>
+                {item.label}
+              </a>
+            ))}
+            <a className="nav-cta" href="#contact">
+              Prendre contact
+            </a>
+          </nav>
+        </div>
       </header>
 
-      <main id="accueil">
-        <section className="hero hero-socialli">
-          <div className="hero-copy reveal-up is-visible">
-            <p className="eyebrow">Accompagnement social personnalisé et confidentiel</p>
-            <h1>{site.name}, une aide concrète et humaine quand le système bloque.</h1>
-            <p className="intro">
-              Je vous aide à débloquer vos démarches administratives, à
-              comprendre vos droits et à avancer avec un accompagnement
-              structuré, bienveillant et sur mesure.
-            </p>
-
-            <ul className="hero-checklist" aria-label="Aides proposées">
-              <li>Débloquer vos démarches administratives</li>
-              <li>Comprendre et faire valoir vos droits</li>
-              <li>Avancer de façon concrète et rassurante</li>
-            </ul>
-
-            <div className="hero-actions">
-              <a className="button button-primary" href="#contact">
-                Prendre contact
-              </a>
-              <a className="button button-secondary" href="#domaines">
-                En savoir plus
-              </a>
-            </div>
-          </div>
-
-          <aside className="hero-side">
-            <div className="hero-identity-card reveal-up is-visible">
-              <div className="hero-card-frame">
-                <img
-                  src={logoBoard}
-                  alt="Identité visuelle de La fabrique sociale"
-                />
+      <main>
+        <section className="hero-section" id="accueil">
+          <div className="hero-inner">
+            <div className="hero-copy">
+              <div className="section-kicker with-dot">
+                Assistante sociale independante
               </div>
-              <div className="hero-card-text">
-                <p>Une identité douce et rassurante</p>
-                <strong>Écouter. Comprendre. Construire ensemble.</strong>
+              <h1>
+                Quand le systeme bloque,
+                <br />
+                <em>je suis la.</em>
+              </h1>
+              <p className="hero-text">
+                La fabrique sociale vous aide a reprendre la main sur vos
+                demarches avec ecoute, confidentialite et un accompagnement sur
+                mesure.
+              </p>
+
+              <ul className="hero-list">
+                <li>Debloquer vos demarches administratives</li>
+                <li>Comprendre et faire valoir vos droits</li>
+                <li>Avancer concretement, a votre rythme</li>
+              </ul>
+
+              <div className="hero-actions">
+                <a className="button-primary" href="#contact">
+                  Prendre contact
+                </a>
+                <a className="button-link" href="#domaines">
+                  Decouvrir l'accompagnement
+                  <span aria-hidden="true">→</span>
+                </a>
               </div>
             </div>
 
-            <div className="contact-badge reveal-up is-visible">
-              <p>Diagnostic gratuit</p>
-              <a href={`tel:${site.phone.replaceAll(' ', '')}`}>{site.phone}</a>
-              <span>Du lundi au vendredi, sur rendez-vous</span>
+            <div className="hero-aside">
+              <div className="portrait-card portrait-card-large">
+                <PlaceholderPortrait label="Portrait a fournir" />
+              </div>
+
+              <div className="contact-float">
+                <div className="section-kicker with-dot small">
+                  Premier contact gratuit
+                </div>
+                <a href={`tel:${site.phone.replaceAll(' ', '')}`}>{site.phone}</a>
+              </div>
             </div>
-
-            <div className="photo-tile reveal-up is-visible">
-              <img
-                src={photos.consultation}
-                alt="Temps d échange et d accompagnement social"
-              />
-            </div>
-          </aside>
-        </section>
-
-        <section className="section-grid reveal-up" id="domaines" data-reveal>
-          <div className="section-heading">
-            <p className="eyebrow">Domaines d intervention</p>
-            <h2>Une approche humaine, un accompagnement sur mesure.</h2>
-          </div>
-
-          <div className="domain-grid">
-            {domains.map((domain) => (
-              <article className="domain-card" key={domain.title}>
-                <h3>{domain.title}</h3>
-                <p>{domain.text}</p>
-                <a href="#contact">En savoir plus</a>
-              </article>
-            ))}
           </div>
         </section>
 
-        <section className="image-break reveal-up" data-reveal>
-          <div className="image-break-copy">
-            <p className="eyebrow">Un accompagnement incarné</p>
-            <h2>Un cadre calme pour reprendre la main sur des démarches parfois lourdes.</h2>
-            <p>
-              Entre écoute, organisation et médiation avec les organismes, le
-              suivi avance pas à pas avec une présence concrète à vos côtés.
-            </p>
-          </div>
-          <div className="image-break-photo">
-            <img
-              src={photos.support}
-              alt="Moment d écoute et de soutien humain"
-            />
-          </div>
-        </section>
+        <section className="domains-section" id="domaines">
+          <div className="content-shell">
+            <div className="section-kicker">Domaines d'intervention</div>
+            <h2>
+              Une approche humaine,
+              <br />
+              <em>un accompagnement sur-mesure.</em>
+            </h2>
 
-        <section className="story-block reveal-up" id="methode" data-reveal>
-          <div className="story-copy">
-            <p className="eyebrow">Parcours d accompagnement</p>
-            <h2>Étapes clés du suivi</h2>
-            <p>
-              Le suivi s organise de manière simple, claire et rassurante, pour
-              que chaque étape ait du sens et réponde à votre situation.
-            </p>
-          </div>
-
-          <div className="steps">
-            {steps.map((step) => (
-              <article className="step-card" key={step.phase}>
-                <span>{step.phase}</span>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="about-section reveal-up" id="apropos" data-reveal>
-          <div className="about-card about-rich">
-            <p className="eyebrow">À propos de moi</p>
-            <h2>Une expérience riche et diversifiée au service d un accompagnement personnalisé.</h2>
-            <p>
-              Avec plusieurs années d expérience dans l accompagnement social,
-              j ai exercé dans différents environnements pour développer une
-              approche souple, humaine et adaptée aux réalités de chacun.
-            </p>
-
-            <ul className="experience-list">
-              {experience.map((item) => (
-                <li key={item}>{item}</li>
+            <div className="domains-grid">
+              {domains.map((domain) => (
+                <DomainCard key={domain.title} {...domain} />
               ))}
-            </ul>
-
-            <p>
-              Mon objectif est d offrir un cadre de confiance pour clarifier la
-              situation, mobiliser les bons leviers et avancer sans vous laisser
-              seul face à la complexité administrative.
-            </p>
-          </div>
-
-          <div className="strengths-card">
-            <h3>Pourquoi faire appel à une assistante sociale indépendante ?</h3>
-            <ul>
-              <li>Un accompagnement libre, indépendant et confidentiel</li>
-              <li>Une relation de confiance construite à votre rythme</li>
-              <li>Des conseils concrets adaptés à votre réalité</li>
-              <li>Une co-construction des démarches et du plan d aide</li>
-            </ul>
+            </div>
           </div>
         </section>
 
-        <section className="photo-band reveal-up" data-reveal>
-          <div className="photo-band-photo">
-            <img
-              src={photos.paperwork}
-              alt="Documents et démarches administratives"
-            />
-          </div>
-          <div className="photo-band-copy">
-            <p className="eyebrow">Clarté et organisation</p>
-            <h2>Mettre de l ordre, comprendre les droits, faire avancer les dossiers.</h2>
-            <p>
-              Le travail ne se limite pas au rendez-vous : analyse, rédaction,
-              coordination et suivi font partie intégrante de l accompagnement.
-            </p>
+        <section className="steps-section">
+          <div className="content-shell">
+            <div className="section-kicker">Parcours d'accompagnement</div>
+            <h2>
+              Les <em>etapes cles</em> du suivi.
+            </h2>
+
+            <div className="steps-grid">
+              {steps.map((step) => (
+                <article className="step-card" key={step.phase}>
+                  <div className="step-phase">{step.phase}</div>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
-        <section className="pricing-section reveal-up" id="tarifs" data-reveal>
-          <div className="section-heading">
-            <p className="eyebrow">Tarifs</p>
-            <h2>Des formules lisibles selon le niveau d accompagnement nécessaire.</h2>
-          </div>
-
-          <div className="pricing-grid">
-            {offers.map((offer) => (
-              <article className="pricing-card" key={offer.name}>
-                <h3>{offer.name}</h3>
-                <strong>{offer.price}</strong>
-                <p>{offer.text}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="contact-section reveal-up" id="contact" data-reveal>
-          <div className="contact-copy">
-            <p className="eyebrow">Prendre contact</p>
-            <h2>Un premier échange peut déjà vous aider à y voir plus clair.</h2>
-            <p>
-              Vous pouvez me joindre par téléphone, par email, ou utiliser le
-              formulaire ci dessous pour expliquer brièvement votre besoin.
-            </p>
-          </div>
-
-          <div className="contact-layout">
-            <div className="contact-panel">
-              <p className="contact-label">Localisation</p>
-              <p>{site.location}</p>
-              <p className="contact-label">M écrire</p>
-              <a href={`mailto:${site.email}`}>{site.email}</a>
-              <p className="contact-label">M appeler</p>
-              <a href={`tel:${site.phone.replaceAll(' ', '')}`}>{site.phone}</a>
+        <section className="about-section-new" id="apropos">
+          <div className="content-shell about-layout">
+            <div className="portrait-card portrait-card-medium">
+              <PlaceholderPortrait label="Portrait a fournir" />
             </div>
 
-            <form className="contact-form">
-              <label>
-                Nom
-                <input type="text" name="lastname" placeholder="Votre nom" />
-              </label>
-              <label>
-                Prénom
-                <input type="text" name="firstname" placeholder="Votre prénom" />
-              </label>
-              <label>
-                Téléphone
-                <input type="tel" name="phone" placeholder="06 00 00 00 00" />
-              </label>
-              <label>
-                Email
-                <input type="email" name="email" placeholder="vous@email.fr" />
-              </label>
-              <label className="full-width">
-                Message
-                <textarea
-                  name="message"
-                  rows="5"
-                  placeholder="Décrivez brièvement votre situation ou votre besoin."
-                />
-              </label>
-              <button className="button button-primary" type="submit">
-                Envoyer
-              </button>
-            </form>
+            <div className="about-copy">
+              <div className="section-kicker">A propos</div>
+              <h2>
+                {site.personName},
+                <br />
+                <em>assistante sociale liberale.</em>
+              </h2>
+              <p>
+                Apres plus de 10 ans d'experience en tant qu'assistante de
+                service social, j'ai exerce dans des domaines varies :
+                l'enfance et l'adolescence, le service social de proximite et
+                le service social d'entreprise.
+              </p>
+              <p>
+                J'ai choisi d'exercer en liberal afin d'offrir un
+                accompagnement sur-mesure, confidentiel et adapte a chaque
+                situation.
+              </p>
+              <a className="button-link" href="#contact">
+                En savoir plus
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="contact-band" id="contact">
+          <div className="content-shell contact-band-inner">
+            <div className="contact-band-copy">
+              <h2>
+                Parlons de <em>votre situation.</em>
+              </h2>
+              <p>
+                Le premier echange est gratuit et sans engagement. Astuces,
+                questionnement ou simplement pour discuter, je vous reponds.
+              </p>
+            </div>
+
+            <div className="contact-band-actions">
+              <div className="contact-line">
+                <div className="contact-icon">☎</div>
+                <div>
+                  <div className="contact-mini-label">M'appeler</div>
+                  <a href={`tel:${site.phone.replaceAll(' ', '')}`}>{site.phone}</a>
+                </div>
+              </div>
+
+              <div className="contact-line">
+                <div className="contact-icon">✉</div>
+                <div>
+                  <div className="contact-mini-label">M'ecrire</div>
+                  <a href={`mailto:${site.email}`}>{site.email}</a>
+                </div>
+              </div>
+
+              <a className="button-white" href={`mailto:${site.email}`}>
+                Prendre rendez-vous
+              </a>
+            </div>
           </div>
         </section>
       </main>
+
+      <footer className="site-footer" id="tarifs">
+        <div className="content-shell">
+          <div className="footer-top">
+            <div className="footer-brand">
+              <div className="footer-title">{site.name}</div>
+              <p>
+                Assistante sociale independante. Un accompagnement humain,
+                confidentiel et sur mesure.
+              </p>
+            </div>
+
+            <div className="footer-columns">
+              <div className="footer-column">
+                <div className="footer-label">Navigation</div>
+                <a href="#accueil">Accueil</a>
+                <a href="#apropos">A propos</a>
+                <a href="#domaines">Domaines d'intervention</a>
+                <a href="#tarifs">Tarifs</a>
+                <a href="#contact">Prendre contact</a>
+              </div>
+
+              <div className="footer-column">
+                <div className="footer-label">Contact</div>
+                <span>{site.phone}</span>
+                <span>{site.email}</span>
+                <span>{site.area}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="footer-bottom">
+            <span>
+              © {site.name} 2026 · {site.legal}
+            </span>
+            <span>Numero RPPS : {site.rpps}</span>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
