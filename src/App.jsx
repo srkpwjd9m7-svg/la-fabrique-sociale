@@ -5,9 +5,8 @@ const site = {
   phone: '06 00 00 00 00',
   email: 'contact@lafabriquesociale.fr',
   area: '[Zone geographique]',
-  legal: 'Mentions legales',
-  rpps: '[a completer]',
   personName: '[Votre nom]',
+  rpps: '[a completer]',
 }
 
 const domains = [
@@ -55,57 +54,47 @@ const steps = [
   },
 ]
 
-const navItems = [
-  { href: '#accueil', label: 'Accueil' },
-  { href: '#apropos', label: 'A propos' },
-  { href: '#domaines', label: "Domaines d'intervention" },
-  { href: '#tarifs', label: 'Tarifs' },
-]
-
-function PlaceholderPortrait({ label }) {
+function CheckIcon() {
   return (
-    <div className="portrait-shell">
-      <div className="portrait-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <circle cx="12" cy="8" r="4" />
-          <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
-        </svg>
-      </div>
-      <span>{label}</span>
-    </div>
+    <span className="hero-check-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+    </span>
   )
 }
 
-function DomainCard({ title, text }) {
+function Arrow() {
+  return <span aria-hidden="true">→</span>
+}
+
+function PlaceholderPortrait() {
   return (
-    <article className="domain-card">
-      <div className="domain-icon" />
-      <h3>{title}</h3>
-      <p>{text}</p>
-      <a href="#contact">
-        En savoir plus
-        <span aria-hidden="true">→</span>
-      </a>
-    </article>
+    <div className="portrait-placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
+      </svg>
+      <span>Portrait a fournir</span>
+    </div>
   )
 }
 
 function App() {
   return (
-    <div className="site">
-      <header className="site-header">
-        <div className="header-inner">
-          <a className="brand-title" href="#accueil">
+    <div className="mock-site">
+      <header className="mock-header">
+        <div className="mock-header__inner">
+          <a className="mock-brand" href="#accueil">
             {site.name}
           </a>
 
-          <nav className="site-nav" aria-label="Navigation principale">
-            {navItems.map((item) => (
-              <a key={item.href} href={item.href}>
-                {item.label}
-              </a>
-            ))}
-            <a className="nav-cta" href="#contact">
+          <nav className="mock-nav" aria-label="Navigation principale">
+            <a href="#accueil">Accueil</a>
+            <a href="#apropos">A propos</a>
+            <a href="#domaines">Domaines d'intervention</a>
+            <a href="#contact">Tarifs</a>
+            <a className="mock-nav__cta" href="#contact">
               Prendre contact
             </a>
           </nav>
@@ -113,59 +102,70 @@ function App() {
       </header>
 
       <main>
-        <section className="hero-section" id="accueil">
-          <div className="hero-inner">
+        <section className="hero-block" id="accueil">
+          <div className="shell hero-block__inner">
             <div className="hero-copy">
-              <div className="section-kicker with-dot">
+              <div className="mini-kicker mini-kicker--dot">
                 Assistante sociale independante
               </div>
-              <h1>
+
+              <h1 className="hero-title">
                 Quand le systeme bloque,
                 <br />
                 <em>je suis la.</em>
               </h1>
+
               <p className="hero-text">
                 La fabrique sociale vous aide a reprendre la main sur vos
                 demarches avec ecoute, confidentialite et un accompagnement sur
                 mesure.
               </p>
 
-              <ul className="hero-list">
-                <li>Debloquer vos demarches administratives</li>
-                <li>Comprendre et faire valoir vos droits</li>
-                <li>Avancer concretement, a votre rythme</li>
-              </ul>
+              <div className="hero-points">
+                <div className="hero-point">
+                  <CheckIcon />
+                  <span>Debloquer vos demarches administratives</span>
+                </div>
+                <div className="hero-point">
+                  <CheckIcon />
+                  <span>Comprendre et faire valoir vos droits</span>
+                </div>
+                <div className="hero-point">
+                  <CheckIcon />
+                  <span>Avancer concretement, a votre rythme</span>
+                </div>
+              </div>
 
               <div className="hero-actions">
-                <a className="button-primary" href="#contact">
+                <a className="pill-button" href="#contact">
                   Prendre contact
                 </a>
-                <a className="button-link" href="#domaines">
+                <a className="text-link" href="#domaines">
                   Decouvrir l'accompagnement
-                  <span aria-hidden="true">→</span>
+                  <Arrow />
                 </a>
               </div>
             </div>
 
-            <div className="hero-aside">
-              <div className="portrait-card portrait-card-large">
-                <PlaceholderPortrait label="Portrait a fournir" />
+            <div className="hero-visual">
+              <div className="portrait-frame portrait-frame--hero">
+                <PlaceholderPortrait />
               </div>
 
-              <div className="contact-float">
-                <div className="section-kicker with-dot small">
+              <div className="floating-card">
+                <div className="mini-kicker mini-kicker--dot mini-kicker--small">
                   Premier contact gratuit
                 </div>
-                <a href={`tel:${site.phone.replaceAll(' ', '')}`}>{site.phone}</a>
+                <div className="floating-card__phone">{site.phone}</div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="domains-section" id="domaines">
-          <div className="content-shell">
-            <div className="section-kicker">Domaines d'intervention</div>
-            <h2>
+        <section className="domains-block" id="domaines">
+          <div className="shell">
+            <div className="mini-kicker">Domaines d'intervention</div>
+            <h2 className="section-title">
               Une approche humaine,
               <br />
               <em>un accompagnement sur-mesure.</em>
@@ -173,16 +173,24 @@ function App() {
 
             <div className="domains-grid">
               {domains.map((domain) => (
-                <DomainCard key={domain.title} {...domain} />
+                <article className="domain-card" key={domain.title}>
+                  <div className="domain-card__icon" />
+                  <h3>{domain.title}</h3>
+                  <p>{domain.text}</p>
+                  <a href="#contact">
+                    En savoir plus
+                    <Arrow />
+                  </a>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="steps-section">
-          <div className="content-shell">
-            <div className="section-kicker">Parcours d'accompagnement</div>
-            <h2>
+        <section className="steps-block">
+          <div className="shell">
+            <div className="mini-kicker">Parcours d'accompagnement</div>
+            <h2 className="section-title">
               Les <em>etapes cles</em> du suivi.
             </h2>
 
@@ -198,15 +206,15 @@ function App() {
           </div>
         </section>
 
-        <section className="about-section-new" id="apropos">
-          <div className="content-shell about-layout">
-            <div className="portrait-card portrait-card-medium">
-              <PlaceholderPortrait label="Portrait a fournir" />
+        <section className="about-block" id="apropos">
+          <div className="shell about-block__inner">
+            <div className="portrait-frame portrait-frame--about">
+              <PlaceholderPortrait />
             </div>
 
             <div className="about-copy">
-              <div className="section-kicker">A propos</div>
-              <h2>
+              <div className="mini-kicker">A propos</div>
+              <h2 className="section-title">
                 {site.personName},
                 <br />
                 <em>assistante sociale liberale.</em>
@@ -222,18 +230,18 @@ function App() {
                 accompagnement sur-mesure, confidentiel et adapte a chaque
                 situation.
               </p>
-              <a className="button-link" href="#contact">
+              <a className="text-link" href="#contact">
                 En savoir plus
-                <span aria-hidden="true">→</span>
+                <Arrow />
               </a>
             </div>
           </div>
         </section>
 
         <section className="contact-band" id="contact">
-          <div className="content-shell contact-band-inner">
-            <div className="contact-band-copy">
-              <h2>
+          <div className="shell contact-band__inner">
+            <div className="contact-band__copy">
+              <h2 className="contact-title">
                 Parlons de <em>votre situation.</em>
               </h2>
               <p>
@@ -242,24 +250,24 @@ function App() {
               </p>
             </div>
 
-            <div className="contact-band-actions">
-              <div className="contact-line">
-                <div className="contact-icon">☎</div>
+            <div className="contact-band__stack">
+              <div className="contact-item">
+                <div className="contact-item__icon">☎</div>
                 <div>
-                  <div className="contact-mini-label">M'appeler</div>
+                  <div className="contact-label">M'appeler</div>
                   <a href={`tel:${site.phone.replaceAll(' ', '')}`}>{site.phone}</a>
                 </div>
               </div>
 
-              <div className="contact-line">
-                <div className="contact-icon">✉</div>
+              <div className="contact-item">
+                <div className="contact-item__icon">✉</div>
                 <div>
-                  <div className="contact-mini-label">M'ecrire</div>
+                  <div className="contact-label">M'ecrire</div>
                   <a href={`mailto:${site.email}`}>{site.email}</a>
                 </div>
               </div>
 
-              <a className="button-white" href={`mailto:${site.email}`}>
+              <a className="white-button" href={`mailto:${site.email}`}>
                 Prendre rendez-vous
               </a>
             </div>
@@ -267,29 +275,29 @@ function App() {
         </section>
       </main>
 
-      <footer className="site-footer" id="tarifs">
-        <div className="content-shell">
-          <div className="footer-top">
-            <div className="footer-brand">
-              <div className="footer-title">{site.name}</div>
+      <footer className="mock-footer">
+        <div className="shell">
+          <div className="mock-footer__top">
+            <div className="mock-footer__brand">
+              <div className="mock-footer__title">{site.name}</div>
               <p>
                 Assistante sociale independante. Un accompagnement humain,
                 confidentiel et sur mesure.
               </p>
             </div>
 
-            <div className="footer-columns">
-              <div className="footer-column">
-                <div className="footer-label">Navigation</div>
+            <div className="mock-footer__cols">
+              <div className="mock-footer__col">
+                <div className="footer-kicker">Navigation</div>
                 <a href="#accueil">Accueil</a>
                 <a href="#apropos">A propos</a>
                 <a href="#domaines">Domaines d'intervention</a>
-                <a href="#tarifs">Tarifs</a>
+                <a href="#contact">Tarifs</a>
                 <a href="#contact">Prendre contact</a>
               </div>
 
-              <div className="footer-column">
-                <div className="footer-label">Contact</div>
+              <div className="mock-footer__col">
+                <div className="footer-kicker">Contact</div>
                 <span>{site.phone}</span>
                 <span>{site.email}</span>
                 <span>{site.area}</span>
@@ -297,10 +305,8 @@ function App() {
             </div>
           </div>
 
-          <div className="footer-bottom">
-            <span>
-              © {site.name} 2026 · {site.legal}
-            </span>
+          <div className="mock-footer__bottom">
+            <span>© La fabrique sociale 2026 · Mentions legales</span>
             <span>Numero RPPS : {site.rpps}</span>
           </div>
         </div>
