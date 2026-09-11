@@ -3,8 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Socialliance | Assistante sociale indépendante</title>
-  <meta name="description" content="Socialliance accompagne particuliers, aidants et professionnels dans leurs démarches sociales, administratives et familiales avec écoute, confidentialité et méthode.">
+  <title>Le Fil Social | Assistante sociale indépendante</title>
+  <meta name="description" content="Le Fil Social accompagne particuliers, aidants et professionnels dans leurs démarches sociales, administratives et familiales. Retrouver des repères, avancer ensemble.">
+  <meta property="og:site_name" content="Le Fil Social">
+  <meta property="og:title" content="Le Fil Social | Assistante sociale indépendante">
+  <meta property="og:description" content="Retrouver des repères, avancer ensemble. Un accompagnement social indépendant, humain et confidentiel pour avancer dans vos démarches.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
   <meta name="theme-color" content="#f6ede3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -212,7 +217,7 @@
       top: 0;
       z-index: 100;
       border-bottom: 1px solid rgba(90, 62, 54, 0.10);
-      background: rgba(246, 237, 227, 0.82);
+      background: var(--cream);
       backdrop-filter: blur(18px) saturate(1.2);
     }
 
@@ -236,6 +241,12 @@
       width: 188px;
       height: auto;
       object-fit: contain;
+    }
+
+    .brand img,
+    .footer-logo {
+      filter: contrast(1.5);
+      mix-blend-mode: multiply;
     }
 
     .nav-links {
@@ -1310,7 +1321,7 @@
 
       .nav-links {
         position: fixed;
-        inset: 92px 16px auto;
+        inset: calc(100% + 8px) 16px auto;
         display: grid;
         gap: 8px;
         border: 1px solid rgba(90, 62, 54, 0.12);
@@ -1385,7 +1396,7 @@
       }
 
       .nav-links {
-        inset: 78px 14px auto;
+        inset: calc(100% + 8px) 14px auto;
       }
 
       .hero {
@@ -1487,8 +1498,8 @@
 
   <header class="topbar">
     <nav class="shell nav" aria-label="Navigation principale">
-      <a class="brand" href="#accueil" aria-label="Retour à l'accueil Socialliance">
-        <img src="../assets/logo-full.png" alt="Socialliance">
+      <a class="brand" href="#accueil" aria-label="Le Fil Social, retour à l'accueil">
+        <img src="../assets/logo-le-fil-social.png" alt="Le Fil Social">
       </a>
 
       <div class="nav-links" id="menu">
@@ -1520,7 +1531,7 @@
         <div class="hero-copy">
           <div class="eyebrow reveal">Assistante sociale indépendante</div>
           <h1 class="reveal delay-1">Avancer dans vos démarches, <span class="accent">sans rester seul.</span></h1>
-          <p class="hero-text reveal delay-2">Socialliance accompagne les particuliers, les aidants et les professionnels face aux démarches administratives, familiales, budgétaires, santé, handicap, logement, emploi et retraite.</p>
+          <p class="hero-text reveal delay-2">Le Fil Social accompagne les particuliers, les aidants et les professionnels face aux démarches administratives, familiales, budgétaires, santé, handicap, logement, emploi et retraite.</p>
           <div class="hero-actions reveal delay-3">
             <a class="btn btn-primary" href="#contact">Demander un premier échange</a>
             <a class="btn btn-soft" href="#situations">Voir les situations accompagnées</a>
@@ -1542,8 +1553,8 @@
             </figure>
           </div>
           <aside class="floating-card">
-            <span class="label">Méthode simple</span>
-            <strong>Écouter. Comprendre. Construire.</strong>
+            <span class="label">Notre engagement</span>
+            <strong>Retrouver des repères, avancer ensemble.</strong>
             <p>Un cadre clair pour identifier les blocages, prioriser les démarches et activer les bons interlocuteurs.</p>
           </aside>
         </div>
@@ -1602,7 +1613,7 @@
         <div>
           <div class="eyebrow reveal">Domaines d'intervention</div>
           <h2 class="reveal">Des réponses adaptées aux réalités de votre quotidien.</h2>
-          <p class="section-lead reveal delay-1">Socialliance intervient lorsque les démarches deviennent difficiles à comprendre, à prioriser ou à faire aboutir.</p>
+          <p class="section-lead reveal delay-1">Le Fil Social intervient lorsque les démarches deviennent difficiles à comprendre, à prioriser ou à faire aboutir.</p>
           <div class="values-grid reveal delay-2">
             <div class="value-card">
               <strong>Secret professionnel</strong>
@@ -1741,7 +1752,7 @@
           <article class="price-card reveal">
             <span class="price-label">Premier contact</span>
             <div class="price">Offert</div>
-            <p>Pour comprendre votre demande et vérifier si Socialliance peut vous aider.</p>
+            <p>Pour comprendre votre demande et vérifier si Le Fil Social peut vous aider.</p>
             <ul>
               <li>Échange téléphonique sans engagement</li>
               <li>Analyse rapide du besoin</li>
@@ -1786,7 +1797,7 @@
           <h2>Ludivine Fayant Verriere, <span class="accent">assistante sociale libérale.</span></h2>
           <p>Diplômée d'État d'assistante de service social, Ludivine accompagne depuis plusieurs années des personnes confrontées à des difficultés sociales, administratives, familiales ou professionnelles.</p>
           <p>Son approche repose sur l'écoute active, la confidentialité, la neutralité et la recherche de solutions concrètes. Chaque situation est regardée dans sa globalité pour éviter les réponses toutes faites.</p>
-          <p>Socialliance est né de cette volonté : proposer un accompagnement humain, indépendant et structuré, pour que chacun puisse retrouver de la clarté et du pouvoir d'agir.</p>
+          <p>Le Fil Social est né de cette volonté : proposer un accompagnement humain, indépendant et structuré, pour que chacun puisse retrouver de la clarté et du pouvoir d'agir.</p>
           <div class="credentials" aria-label="Repères professionnels">
             <div class="credential">
               <strong>DEASS</strong>
@@ -1842,7 +1853,7 @@
       <div class="shell split">
         <div class="quote-card reveal">
           <p>Demander de l'aide n'est pas un échec. C'est souvent le premier pas pour reprendre la main.</p>
-          <span>Socialliance vous accompagne avec méthode, douceur et confidentialité, pour transformer une situation confuse en plan d'action concret.</span>
+          <span>Le Fil Social vous accompagne avec méthode, douceur et confidentialité, pour transformer une situation confuse en plan d'action concret.</span>
         </div>
         <figure class="image-panel reveal delay-1">
           <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1100&q=82" alt="Ordinateur et documents administratifs sur un bureau">
@@ -1909,7 +1920,7 @@
     <div class="shell">
       <div class="footer-grid">
         <div>
-          <img class="footer-logo" src="../assets/logo-full.png" alt="Socialliance">
+          <img class="footer-logo" src="../assets/logo-le-fil-social.png" alt="Le Fil Social" loading="lazy">
           <p>Accompagnement social indépendant pour clarifier vos démarches, faire valoir vos droits et construire un plan d'action adapté.</p>
         </div>
         <div class="footer-group">
@@ -1927,7 +1938,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© Socialliance 2026. Tous droits réservés.</span>
+        <span>© Le Fil Social 2026. Tous droits réservés.</span>
         <span>Mentions légales et numéro RPPS à compléter avant lancement officiel.</span>
       </div>
     </div>
@@ -1974,9 +1985,9 @@
       const phone = data.get("phone") || "";
       const email = data.get("email") || "";
       const message = data.get("message") || "";
-      const subject = encodeURIComponent(`Demande de rappel Socialliance - ${name}`);
+      const subject = encodeURIComponent(`Demande de rappel Le Fil Social - ${name}`);
       const body = encodeURIComponent(
-        `Bonjour,\n\nJe souhaite être recontacté(e) par Socialliance.\n\nNom : ${name}\nTéléphone : ${phone}\nEmail : ${email}\n\nMa demande :\n${message}\n\nMerci.`
+        `Bonjour,\n\nJe souhaite être recontacté(e) par Le Fil Social.\n\nNom : ${name}\nTéléphone : ${phone}\nEmail : ${email}\n\nMa demande :\n${message}\n\nMerci.`
       );
       window.location.href = `mailto:contact@socialliance.fr?subject=${subject}&body=${body}`;
     });
